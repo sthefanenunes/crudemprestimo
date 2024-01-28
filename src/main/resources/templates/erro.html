@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Erro - Soulib</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/home">&#9666; Home</a>
+      <h1>Erro</h1>
+      <!-- Se msg é null, usa a mensagem padrão -->
+      <p th:text="${msg} ?: 'Um erro interno aconteceu.'"></p>
+    </main>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

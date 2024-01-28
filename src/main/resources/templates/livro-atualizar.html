@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livro - Soulib</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/livros">&#9666; Voltar</a>
+      <h1>Editar Livro</h1>
+      <hr />
+      <form action="/livros/update" method="post">
+        <input type="hidden" name="idLivro" th:value="${livro.idLivro}" />
+
+        <label for="titulo">Titulo <span style="color: red">*</span></label>
+        <input
+          th:value="${livro.titulo}"
+          type="text"
+          name="titulo"
+          id="titulo"
+          maxlength="120"
+          required
+        />
+
+        <label for="autor">Autor<span style="color: red">*</span></label>
+        <input
+          th:value="${livro.autor}"
+          type="text"
+          name="autor"
+          id="autor"
+          maxlength="80"
+          required
+        />
+
+        <label for="descricao"
+          >Descrição<span style="color: red">*</span></label
+        >
+        <input
+          th:value="${livro.descricao}"
+          type="text"
+          name="descricao"
+          id="descricao"
+          maxlength="180"
+          required
+        />
+
+        <label for="editora">Editora<span style="color: red">*</span></label>
+        <input
+          th:value="${livro.editora}"
+          type="text"
+          name="editora"
+          id="editora"
+          maxlength="40"
+          required
+        />
+
+        <label for="paginas">Paginas<span style="color: red">*</span></label>
+        <input
+          th:value="${livro.paginas}"
+          type="number"
+          name="paginas"
+          id="paginas"
+          required
+        />
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

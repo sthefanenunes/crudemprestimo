@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empréstimos</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/">&#9666; Home</a>
+      <!-- Tabela de empréstimos -->
+      <hr />
+      <h2>Novo Empréstimo</h2>
+      <form action="/emprestimos/create" method="post">
+        <label for="dataRealizada"
+          >Data Realizada<span style="color: red">*</span></label
+        >
+        <input type="date" name="dataRealizada" id="dataRealizada" required />
+
+        <label for="dataDevolucao"
+          >Data Devolução<span style="color: red">*</span></label
+        >
+        <input type="date" name="dataDevolucao" id="dataDevolucao" required />
+
+        <label for="finalizado"
+          ><input
+            type="checkbox"
+            name="finalizado"
+            id="finalizado"
+          />Finalizado?</label
+        >
+
+        <select name="idLivro" required>
+          <option selected disabled value="">Selecione um livro</option>
+          <option th:each="livro : ${listaLivros}" th:value="${livro.idLivro}">
+            <span th:text="${livro.titulo}"></span> -
+            <span th:text="${livro.autor}"></span>
+          </option>
+        </select>
+
+        <select name="idCliente" required>
+          <option selected disabled value="">Selecione um cliente</option>
+          <option
+            th:each="cliente : ${listaClientes}"
+            th:value="${cliente.idCliente}"
+          >
+            <span th:text="${cliente.nome}"></span> -
+            <span th:text="${cliente.email}"></span>
+          </option>
+        </select>
+
+        <button type="submit">Enviar</button>
+      </form>
+      <!---->
+      <h1>Emprestimos</h1>
+      <p>Lista de emprestimos.</p>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Livro</th>
+            <th>Data de Retirada</th>
+            <th>Data de Entrega</th>
+            <th>Entregue</th>
+            <th>Excluir</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="emprestimo : ${listaEmprestimos}">
+            <td>
+              <a
+                th:href="'/emprestimos/'+${emprestimo.idEmprestimo}"
+                th:text="${emprestimo.cliente.nome}"
+              >
+              </a>
+            </td>
+            <td th:text="${emprestimo.livroEmprestado.titulo}"></td>
+            <td th:text="${emprestimo.dataRealizada}"></td>
+            <td th:text="${emprestimo.dataDevolucao}"></td>
+            <td th:text="${emprestimo.finalizado ? 'Sim' : 'Não'}"></td>
+            <td>
+              <form action="/emprestimos/delete" method="post">
+                <input
+                  type="hidden"
+                  name="id"
+                  th:value="${emprestimo.idEmprestimo}"
+                />
+                <button type="submit">Excluir</button>
+              </form>
+            </td>
+            <td>
+              <a th:href="'/emprestimos/'+${emprestimo.idEmprestimo}+'/edit'">
+                <button>Editar</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes - Soulib</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/home">&#9666; Home</a>
+      <h1>Clientes</h1>
+      <p>Lista de clientes.</p>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Excluir</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Na tag que se repete aplique th:each -->
+          <tr th:each="cliente : ${listaClientes}">
+            <td>
+              <a 
+                th:href="'/clientes/'+${cliente.idCliente}" 
+                th:text="${cliente.nome}">
+              </a>
+            </td>
+            <td th:text="${cliente.email}"></td>
+            <td th:text="${cliente.telefone}"></td>
+            <td>
+              <form action="/clientes/delete" method="post">
+                <input type="hidden" name="id" th:value="${cliente.idCliente}"/>
+                <button type="submit">Excluir</button>
+              </form>
+            </td>
+            <td>
+              <a th:href="'/clientes/'+${cliente.idCliente}+'/edit'">
+                <button>Editar</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <h2>Novo Cliente</h2>
+      <form action="/clientes/create" method="post">
+        <!-- Na inserção, atente-se para os campos do Model -->
+        <label for="nome">Nome <span style="color: red">*</span></label>
+        <input type="text" name="nome" id="nome" maxlength="100" required/>
+
+        <label for="telefone">Telefone <span style="color: red">*</span></label>
+        <input type="tel" name="telefone" id="telefone" maxlength="42" required/>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" maxlength="120"/>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

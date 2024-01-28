@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Livros - Soulib</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/home">&#9666; Home</a>
+      <h1>Livros</h1>
+      <p>Lista de livros.</p>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Descrição</th>
+            <th>Editora</th>
+            <th>Paginas</th>
+            <th>Excluir</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="livro : ${listaLivros}">
+            <td>
+              <a
+                th:href="'/livros/'+${livro.idLivro}"
+                th:text="${livro.titulo}"
+              >
+              </a>
+            </td>
+            <td th:text="${livro.autor}"></td>
+            <td th:text="${livro.descricao}"></td>
+            <td th:text="${livro.editora}"></td>
+            <td th:text="${livro.paginas}"></td>
+            <td>
+              <form action="/livros/delete" method="post">
+                <input type="hidden" name="id" th:value="${livro.idLivro}" />
+                <button type="submit">Excluir</button>
+              </form>
+            </td>
+            <td>
+              <a th:href="'/livros/'+${livro.idLivro}+'/edit'">
+                <button>Editar</button>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Formulário de Novo Cliente-->
+      <hr />
+      <h2>Novo Livro</h2>
+      <form action="/livros/create" method="post">
+        <!-- Na inserção, atente-se para os campos do Model -->
+        <label for="titulo">Titulo <span style="color: red">*</span></label>
+        <input type="text" name="titulo" id="titulo" maxlength="120" required />
+
+        <label for="autor">Autor<span style="color: red">*</span></label>
+        <input type="text" name="autor" id="autor" maxlength="80" required />
+
+        <label for="descricao"
+          >Descrição<span style="color: red">*</span></label
+        >
+        <textarea
+          type="text"
+          name="descricao"
+          id="descricao"
+          maxlength="180"
+          required
+        ></textarea>
+
+        <label for="editora">Editora<span style="color: red">*</span></label>
+        <input
+          type="text"
+          name="editora"
+          id="editora"
+          maxlength="40"
+          required
+        />
+
+        <label for="paginas">Paginas<span style="color: red">*</span></label>
+        <input type="number" name="paginas" id="paginas" required />
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

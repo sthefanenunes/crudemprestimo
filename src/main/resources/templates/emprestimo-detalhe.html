@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Empréstimo</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <a href="/emprestimos">&#9666; Voltar</a>
+      <h1>Detalhes do Empréstimo</h1>
+      <th>
+        <p>Cliente: <span th:text="${emprestimo.cliente.nome}"></span></p>
+        <p>
+          Livro: <span th:text="${emprestimo.livroEmprestado.titulo}"></span>
+        </p>
+        <p>
+          Data de Retirada: <span th:text="${emprestimo.dataRealizada}"></span>
+        </p>
+        <p>
+          Data de Devolução: <span th:text="${emprestimo.dataDevolucao}"></span>
+        </p>
+        <p>
+          Entregue:
+          <span th:text="${emprestimo.finalizado ? 'Sim' : 'Não'}"></span>
+        </p>
+      </th>
+    </main>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
